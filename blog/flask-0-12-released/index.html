@@ -1,0 +1,192 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/flask-0-12-released/">
+<meta property="og:title" content="Flask 0.12 released">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>Flask 0.12 released | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+  <div class="blog-post">
+  
+    <h2>Flask 0.12 released</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/untitaker">Markus Unterwaditzer</a>
+    
+    on 2016-12-21
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>Flask 0.12 has been released. This is not as big a step as 0.11 has been, the only intentionally backwards-incompatible change is with regards to <code>send_file</code>'s behavior, which, when invoked as <code>send_file(f)</code> with <code>f</code> being a file-like object, no longer guesses the MIME-type from <code>f.name</code>. You have to pass a filepath instead.</p>
+<p>Special thanks to <a href="https://github.com/wgwz">Kyle Lawlor</a> for fixing up most documentation after the <code>flask</code> CLI got introduced.</p>
+<h2 id="changelog">Changelog</h2><ul>
+<li>the cli command now responds to <code>--version</code>.</li>
+<li>Mimetype guessing and ETag generation for file-like objects in <code>send_file</code>
+has been removed, as per issue <code>#104</code>.  See pull request <code>#1849</code>.</li>
+<li>Mimetype guessing in <code>send_file</code> now fails loudly and doesn't fall back to
+<code>application/octet-stream</code>. See pull request <code>#1988</code>.</li>
+<li>Make <code>flask.safe_join</code> able to join multiple paths like <code>os.path.join</code>
+(pull request <code>#1730</code>).</li>
+<li>Revert a behavior change that made the dev server crash instead of returning
+a Internal Server Error (pull request <code>#2006</code>).</li>
+<li>Correctly invoke response handlers for both regular request dispatching as
+well as error handlers.</li>
+<li>Disable logger propagation by default for the app logger.</li>
+<li>Add support for range requests in <code>send_file</code>.</li>
+<li><code>app.test_client</code> includes preset default environment, which can now be
+directly set, instead of per <code>client.get</code>.</li>
+</ul>
+
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/flask-0-12-released/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

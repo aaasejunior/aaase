@@ -1,0 +1,186 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/markupsafe-1-1-0-released/">
+<meta property="og:title" content="MarkupSafe 1.1.0 Released">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>MarkupSafe 1.1.0 Released | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+  <div class="blog-post">
+  
+    <h2>MarkupSafe 1.1.0 Released</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2018-11-05
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p><a href="https://markupsafe.palletsprojects.com/en/1.1.x/changes/">Changelog</a></p>
+<ul>
+<li>Dropped support for Python 2.6 and 3.3.</li>
+<li>Using newer CPython APIs gave the C extension a 1.5x speedup on Python 3. Python 2 will still get the same speed as before, but you should consider upgrading if possible.</li>
+<li>The <code>escape</code> function uses the <code>__html__</code> method on an object if it's available. It will now ensure that result is wrapped in the <code>Markup</code> class, for consistency with other behavior.</li>
+</ul>
+<h2 id="platform-wheels">Platform Wheels</h2><p>Installing from PyPI with pip will now install a precompiled wheel if available. Wheels have been compiled for supported CPython versions on Linux, Mac, and Windows.</p>
+<p>MarkupSafe comes with a C extension that adds a significant speedup to escaping. However, if a compiler or headers aren't available, the install will fall back to a native Python implementation. Previously, the user would see no indication that they didn't get the speedups, or would see confusing error messages even though the install succeeded. Now, many more users will be able to take advantage of the speedups provided by MarkupSafe without extra configuration.</p>
+<h2 id="documentation">Documentation</h2><p>Full documentation has been added in place of the previous README. It is available through Read the Docs at <a href="https://markupsafe.palletsprojects.com/">https://markupsafe.palletsprojects.com/</a>.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/MarkupSafe">PyPI</a> with pip:</p>
+<pre><code>pip install -U MarkupSafe
+</code></pre>
+<h2 id="donate">Donate</h2><p>We accept donations through the Python Software Foundation in order to support our efforts to maintain the projects and grow the community. <a href="/donate">Click here to donate.</a></p>
+
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/markupsafe-1-1-0-released/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

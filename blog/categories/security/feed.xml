@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>urn:uuid:f9201c82-4e76-37cc-bbeb-73b44900f7f0</id>
+  <title>Security — Pallets Project</title>
+  <updated>2023-02-12T19:47:14.106899+00:00</updated>
+  <link href="https://aaasejuniorboard.com/blog/"/>
+  <link href="https://aaasejuniorboard.com/blog/categories/security/feed.xml" rel="self"/>
+  <generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator>
+  <entry>
+    <id>urn:uuid:94c038e4-99fc-3cb6-ad43-87c38cfc518f</id>
+    <title>Werkzeug 0.11.6 Security Release</title>
+    <updated>2016-04-14T00:00:00+00:00</updated>
+    <author>
+      <name>Armin Ronacher</name>
+    </author>
+    <content type="html">&lt;p&gt;Today we pushed out a &lt;a href="/p/werkzeug/"&gt;Werkzeug&lt;/a&gt; bugfix release which contains
+a security relevant fix.  It has come to our attention (reported by &lt;a href="https://github.com/JordanMilne/"&gt;Jordan Milne&lt;/a&gt;)
+that the PIN brute-force protection in the Werkzeug debugger could be bypassed
+by attacking the cookie rather than the PIN.  While this is generally not easily
+fixable we improved the situation by mixing in higher quality secret data into the
+cookie name and made it more complex.  We now include a UUID of the machine
+the code is running on.&lt;/p&gt;
+&lt;p&gt;This should make it significantly more complex to bypass the PIN check.  That said
+we want to reiterate that the PIN protection for the debugger is &lt;em&gt;not a suitable
+protection to run the debugger in production&lt;/em&gt;.  It's a basic security feature to make
+it less likely to use an accidentally enabled debugger.  Please ensure that you never
+enable the debugger in production environments regardless of this feature.&lt;/p&gt;
+</content>
+    <link href="https://aaasejuniorboard.com/blog/werkzeug-0-11-6-security-release/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:uuid:f51a33d2-73ab-3a87-b3ad-22ac7d2a5a3e</id>
+    <title>Jinja 2.8.1 Security Release</title>
+    <updated>2016-12-29T00:00:00+00:00</updated>
+    <author>
+      <name>Armin Ronacher</name>
+    </author>
+    <content type="html">&lt;p&gt;We just pushed out a new release for Jinja (2.8.1) which includes a security related
+fix. If you are using the Jinja2 sandbox you are encouraged to upgrade or alternatively
+manually further lock down the sandbox.&lt;/p&gt;
+&lt;p&gt;The core of the issue is that Python's string format method that was added to strings
+can be used to discover potentially dangerous values including configuration values:&lt;/p&gt;
+&lt;div class="hll"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;SECRET_KEY&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;12345&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="gp"&gt;... &lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="gp"&gt;... &lt;/span&gt;  &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+&lt;span class="gp"&gt;...&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;joe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{0.__class__.__init__.__globals__[config]}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="go"&gt;&amp;quot;{&amp;#39;SECRET_KEY&amp;#39;: &amp;#39;12345&amp;#39;}&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For this reason &lt;em&gt;you must never let user supply format strings&lt;/em&gt; in raw Python as its
+too easy to escape them. However specifically for the Jinja2 sandbox we changed the
+behavior now that we're using the same sandboxing functionality that Jinja2 uses
+for its own runtime also for Python string formatting.&lt;/p&gt;
+&lt;p&gt;This means that with 2.8.1 and higher templates from sandboxed environments will
+intercept format strings the same way as with normal cases:&lt;/p&gt;
+&lt;div class="hll"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;jinja2.sandbox&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SandboxedEnvironment&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SandboxedEnvironment&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="gp"&gt;... &lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="gp"&gt;... &lt;/span&gt;  &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+&lt;span class="gp"&gt;...&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;span class="gp"&gt;... &lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{{ &amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{0.__class__.__init__.__globals__}&lt;/span&gt;&lt;span class="s1"&gt;&amp;quot;.format(user) }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="gp"&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;joe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="gt"&gt;Traceback (most recent call last):&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c"&gt;...&lt;/span&gt;
+&lt;span class="gr"&gt;jinja2.exceptions.SecurityError&lt;/span&gt;: &lt;span class="n"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you don't want or you cannot upgrade Jinja2, you can override the &lt;code&gt;is_safe_attribute&lt;/code&gt;
+method on the sandbox and explicitly disallow all &lt;code&gt;format&lt;/code&gt; attributes on strings.&lt;/p&gt;
+&lt;p&gt;Thank you to &lt;a href="https://twitter.com/odony"&gt;Olivier Dony&lt;/a&gt; for reporting the issue.&lt;/p&gt;
+</content>
+    <link href="https://aaasejuniorboard.com/blog/jinja-2-8-1-released/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:uuid:4c4f3324-8870-3360-b913-87c8b518d6ed</id>
+    <title>Security bugs on Windows servers: Flask 0.12.2 and Werkzeug 0.12.2 released</title>
+    <updated>2017-05-16T00:00:00+00:00</updated>
+    <author>
+      <name>Markus Unterwaditzer</name>
+    </author>
+    <content type="html">&lt;p&gt;Flask 0.12.2 and Werkzeug 0.12.2 have been released. They contain the same
+&lt;strong&gt;security bugfix&lt;/strong&gt; for the &lt;code&gt;safe_join&lt;/code&gt; function in each package.&lt;/p&gt;
+&lt;p&gt;The problem only occurs if you are running your application on a Windows
+server.&lt;/p&gt;
+&lt;h2 id="details"&gt;Details&lt;/h2&gt;&lt;p&gt;&lt;a href="https://twitter.com/davidism"&gt;David Lord&lt;/a&gt; initially found this bug (thanks!)
+and disclosed it to the other maintainers in a private email:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;While going through PR #2059 about safe_join, I looked up Python's ntpath.join
+and discovered a vulnerability that safe_join on Windows doesn't cover.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.python.org/3/library/os.path.html#os.path.join"&gt;https://docs.python.org/3/library/os.path.html#os.path.join&lt;/a&gt;:
+"&lt;code&gt;os.path.join("c:", "foo")&lt;/code&gt; represents a path relative to the current
+directory on drive C: &lt;code&gt;(c:foo)&lt;/code&gt;"
+&lt;br&gt;
+&lt;code&gt;safe_join('\\root\\path', 'd:', 'test.txt')&lt;/code&gt; would break out of the trusted
+root directory and instead take the test file relative to the cwd on the d
+drive.  This doesn't give completely arbitrary path access, since it's
+limited to the cwd, but it's still not good.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For the application developer this means that endpoints using &lt;code&gt;safe_join&lt;/code&gt; could
+potentially be used to disclose arbitrary files in the server processes'
+current working directory on Windows.&lt;/p&gt;
+&lt;h2 id="what-happens-next"&gt;What happens next&lt;/h2&gt;&lt;p&gt;We strongly recommend upgrading to Flask 0.12.2 and Werkzeug 0.12.2, as this
+bug has been fixed there (&lt;a href="https://github.com/pallets/flask/pull/2284"&gt;Flask&lt;/a&gt;,
+&lt;a href="https://github.com/pallets/werkzeug/commit/2497866d7eafa64ca5eb4fb3d1747c05036bf318"&gt;Werkzeug&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;A CVE has been requested on &lt;code&gt;Tue, 16 May 2017 06:51:09 +0000&lt;/code&gt;, the CVE &lt;code&gt;CVE-2017-9088&lt;/code&gt; was assigned.&lt;/p&gt;
+</content>
+    <link href="https://aaasejuniorboard.com/blog/flask-werkzeug-0-12-2-security-release/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:uuid:610ac3f7-79ef-31bf-9440-0490e14b2cb5</id>
+    <title>Flask 0.12.3 Released</title>
+    <updated>2018-04-26T00:00:00+00:00</updated>
+    <author>
+      <name>David Lord</name>
+    </author>
+    <content type="html">&lt;p&gt;This release includes an important security fix for JSON and a minor backport for CLI support in PyCharm. It is provided for projects that cannot update to Flask 1.0 immediately. See the &lt;a href="/blog/flask-1-0-released"&gt;1.0 announcement&lt;/a&gt; and update to it instead if possible.&lt;/p&gt;
+&lt;h2 id="json-security-fix"&gt;JSON Security Fix&lt;/h2&gt;&lt;p&gt;Flask previously decoded incoming JSON bytes using the content type of the request. Although JSON should only be encoded as UTF-8, Flask was more lenient. However, Python includes non-text related encodings that could result in unexpected memory use by a request.&lt;/p&gt;
+&lt;p&gt;Flask will now detect the encoding of incoming JSON data as one of the supported UTF encodings, and will not allow arbitrary encodings from the request.&lt;/p&gt;
+&lt;h2 id="upgrade"&gt;Upgrade&lt;/h2&gt;&lt;p&gt;Upgrade from &lt;a href="https://pypi.org/project/Flask/"&gt;PyPI&lt;/a&gt; with pip. Use a version identifier if you want to stay at 0.12:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install -U Flask==0.12.3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Or upgrade to 1.0:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install -U Flask
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+    <link href="https://aaasejuniorboard.com/blog/flask-0-12-3-released/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:uuid:367f51b7-bcf4-36cc-abd3-40847f407fb8</id>
+    <title>Flask 1.0 Released</title>
+    <updated>2018-04-26T00:00:00+00:00</updated>
+    <author>
+      <name>David Lord</name>
+    </author>
+    <content type="html">&lt;p&gt;The Pallets team is pleased to release &lt;a href="https://palletsprojects.com/p/flask/"&gt;Flask&lt;/a&gt; 1.0.&lt;/p&gt;
+&lt;p&gt;The Flask framework has been stable for a long time. A little more than 8 years after the first commit, the version number finally reflects that. 1.0 comes with a significant number of changes representing over a year of work.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Dropped support for Python 2.6 and 3.3.&lt;/li&gt;
+&lt;li&gt;The CLI is more flexible. &lt;code&gt;FLASK_APP&lt;/code&gt; can point to an app factory, optionally with arguments. It understands import names in more cases where filenames were previously used. It automatically detects common filenames, app names, and factory names. &lt;code&gt;FLASK_ENV&lt;/code&gt; describes the environment the app is running in, like &lt;code&gt;development&lt;/code&gt;, and replaces &lt;code&gt;FLASK_DEBUG&lt;/code&gt; in most cases. &lt;a href="http://flask.pocoo.org/docs/1.0/cli/"&gt;See the docs to learn more.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;If python-dotenv is installed, the &lt;code&gt;flask&lt;/code&gt; CLI will load environment variables from &lt;code&gt;.flaskenv&lt;/code&gt; and &lt;code&gt;.env&lt;/code&gt; files rather than having to export them in each new terminal.&lt;/li&gt;
+&lt;li&gt;The development server is multi-threaded by default to handle concurrent requests during development.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;flask.ext&lt;/code&gt;, which was previously deprecated, is completely removed. Import extensions by their actual package names.&lt;/li&gt;
+&lt;li&gt;Accessing missing keys from &lt;code&gt;request.form&lt;/code&gt; shows a more helpful error message in debug mode, addressing a very common source of confusion for developers.&lt;/li&gt;
+&lt;li&gt;Error handlers are looked up by code then exception class, on the blueprint then application. This gives more predictable control over handlers, including being able to handle &lt;code&gt;HTTPException&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The behavior of &lt;code&gt;app.logger&lt;/code&gt; has been greatly simplified and should be much easier to customize. The logger is always named &lt;code&gt;flask.app&lt;/code&gt;, it only adds a handler if none are registered, and it never removes existing handlers. &lt;a href="http://flask.pocoo.org/docs/1.0/logging/"&gt;See the docs to learn more.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;test_client&lt;/code&gt; gained a &lt;code&gt;json&lt;/code&gt; argument for posting JSON data, and the &lt;code&gt;Response&lt;/code&gt; object gained a &lt;code&gt;get_json&lt;/code&gt; method to decode the data as JSON in tests.&lt;/li&gt;
+&lt;li&gt;A new &lt;code&gt;test_cli_runner&lt;/code&gt; is added for testing an app's CLI commands.&lt;/li&gt;
+&lt;li&gt;Many documentation sections have been rewritten to improve clarity and relevance. This is an ongoing effort.&lt;/li&gt;
+&lt;li&gt;The &lt;a href="http://flask.pocoo.org/docs/1.0/tutorial/"&gt;tutorial&lt;/a&gt; and corresponding &lt;a href="https://github.com/pallets/flask/tree/1.0/examples/tutorial"&gt;example&lt;/a&gt; have been rewritten. They use a structured layout and go into more detail about each aspect in order to help new users avoid common issues and become comfortable with Flask.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are many more changes throughout the framework. &lt;a href="http://flask.pocoo.org/docs/1.0/changelog/"&gt;Read the full changelog&lt;/a&gt; to understand what changes may affect your code when upgrading.&lt;/p&gt;
+&lt;h2 id="json-security-fix"&gt;JSON Security Fix&lt;/h2&gt;&lt;p&gt;Flask previously decoded incoming JSON bytes using the content type of the request. Although JSON should only be encoded as UTF-8, Flask was more lenient. However, Python includes non-text related encodings that could result in unexpected memory use by a request.&lt;/p&gt;
+&lt;p&gt;Flask will now detect the encoding of incoming JSON data as one of the supported UTF encodings, and will not allow arbitrary encodings from the request.&lt;/p&gt;
+&lt;h2 id="install-or-upgrade"&gt;Install or Upgrade&lt;/h2&gt;&lt;p&gt;Install from &lt;a href="https://pypi.org/project/Flask/"&gt;PyPI&lt;/a&gt; with pip:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install -U Flask
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="get-involved"&gt;Get Involved&lt;/h2&gt;&lt;p&gt;Flask and the Pallets team depends on you, the community. Whether you report issues, write documentation, create patches, or answer questions, we appreciate all the help you provide. Check out the &lt;a href="https://github.com/pallets/flask/blob/master/CONTRIBUTING.rst"&gt;contributing guide&lt;/a&gt; to get started.&lt;/p&gt;
+&lt;h2 id="donate"&gt;Donate&lt;/h2&gt;&lt;p&gt;The Pallets organization has joined the Python Software Foundation's Fiscal Sponsorship program. We now accept donations through the PSF in order to support our efforts to maintain the projects and grow the community. &lt;a href="https://psfmember.org/civicrm/contribute/transact?reset=1&amp;amp;id=20"&gt;Click here to donate.&lt;/a&gt;&lt;/p&gt;
+</content>
+    <link href="https://aaasejuniorboard.com/blog/flask-1-0-released/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:uuid:643e93bf-7542-3963-875a-88fa01b45163</id>
+    <title>Jinja 2.10.1 Security Release</title>
+    <updated>2019-04-06T00:00:00+00:00</updated>
+    <author>
+      <name>David Lord</name>
+    </author>
+    <content type="html">&lt;p&gt;Jinja 2.10.1 has been released and includes a security-related fix. If
+you are using the Jinja &lt;a href="http://jinja.pocoo.org/docs/2.10/sandbox/"&gt;sandboxed environment&lt;/a&gt; you are encouraged to
+upgrade.&lt;/p&gt;
+&lt;p&gt;MITRE has assigned &lt;a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10906"&gt;CVE-2019-10906&lt;/a&gt; to this issue.&lt;/p&gt;
+&lt;p&gt;Thank you to &lt;a href="https://brianwel.ch"&gt;Brian Welch&lt;/a&gt; for responsibly reporting the issue, and to
+&lt;a href="https://twitter.com/mitsuhiko"&gt;Armin Ronacher&lt;/a&gt; for writing the fix.&lt;/p&gt;
+&lt;p&gt;The sandbox is used to restrict what code can be evaluated when
+rendering untrusted, user-provided templates. Due to the way string
+formatting works in Python, the &lt;code&gt;str.format_map&lt;/code&gt; method could be used to
+escape the sandbox.&lt;/p&gt;
+&lt;p&gt;This issue was previously addressed for the &lt;code&gt;str.format&lt;/code&gt; method in
+&lt;a href="/blog/jinja-281-released/"&gt;Jinja 2.8.1&lt;/a&gt;, which discusses the issue in detail. However, the
+less-common &lt;code&gt;str.format_map&lt;/code&gt; method was overlooked. This release applies
+the same sandboxing to both methods.&lt;/p&gt;
+&lt;p&gt;If you cannot upgrade Jinja, you can override the &lt;code&gt;is_safe_attribute&lt;/code&gt;
+method on the sandbox and explicitly disallow the &lt;code&gt;format_map&lt;/code&gt;
+method on string objects.&lt;/p&gt;
+&lt;h2 id="reporting-security-issues"&gt;Reporting Security Issues&lt;/h2&gt;&lt;p&gt;If you think you have discovered a security issue in Jinja or another of
+the Pallets projects, please email &lt;a href="mailto:security@palletsprojects.com"&gt;security@palletsprojects.com&lt;/a&gt; with
+details.&lt;/p&gt;
+</content>
+    <link href="https://aaasejuniorboard.com/blog/jinja-2-10-1-released/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:uuid:4840b55d-f914-3001-8dc0-a8ecf0e4fcaf</id>
+    <title>Werkzeug 0.15.3 Released</title>
+    <updated>2019-05-14T00:00:00+00:00</updated>
+    <author>
+      <name>David Lord</name>
+    </author>
+    <content type="html">&lt;p&gt;Werkzeug 0.15.3 has been released, followed closely by 0.15.4. Both fix
+bugs and compatibility issues. The &lt;a href="https://werkzeug.palletsprojects.com/en/0.15.x/changes/#version-0-15-3"&gt;changelog&lt;/a&gt; lists the changes in
+detail, which include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The debugger pin is unique per Docker container.&lt;/li&gt;
+&lt;li&gt;Fix issues with the arguments to the &lt;code&gt;Unauthorized&lt;/code&gt; HTTP exception.&lt;/li&gt;
+&lt;li&gt;Fix &lt;code&gt;ProfilerMiddleware&lt;/code&gt; filenames, and get &lt;code&gt;LintMiddleware&lt;/code&gt; working
+on Python 3.&lt;/li&gt;
+&lt;li&gt;Bytes passed to URLs will be correctly decoded rather than having a
+&lt;code&gt;b&lt;/code&gt; prefix.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="debugger-pin-security"&gt;Debugger Pin Security&lt;/h2&gt;&lt;p&gt;A minor security issue was addressed in this release. The debugger
+generates a unique pin per host to prevent unauthorized code execution.
+However, in Docker this pin would be identical across all containers.
+This release ensures each container uses a unique pin.&lt;/p&gt;
+&lt;p&gt;Thank you to Nikita Tikhomirov for responsibly reporting the issue. If
+you think you have discovered a security issue in Werkzeug or another of
+the Pallets projects, please email &lt;a href="mailto:security@palletsprojects.com"&gt;security@palletsprojects.com&lt;/a&gt; with
+details.&lt;/p&gt;
+&lt;h2 id="install-or-upgrade"&gt;Install or Upgrade&lt;/h2&gt;&lt;p&gt;Install from &lt;a href="https://pypi.org/project/Werkzeug/"&gt;PyPI&lt;/a&gt; with pip:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install -U Werkzeug
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+    <link href="https://aaasejuniorboard.com/blog/werkzeug-0-15-3-released/" rel="alternate"/>
+  </entry>
+  <entry>
+    <id>urn:uuid:75ad40ec-da0c-3f67-9514-dc843095bab8</id>
+    <title>Werkzeug 0.15.5 Released</title>
+    <updated>2019-07-17T00:00:00+00:00</updated>
+    <author>
+      <name>David Lord</name>
+    </author>
+    <content type="html">&lt;p&gt;Werkzeug 0.15.5 has been released, containing bug and security fixes.
+The &lt;a href="https://werkzeug.palletsprojects.com/en/0.15.x/changes/#version-0-15-5"&gt;changelog&lt;/a&gt; lists the changes in detail, which include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SharedDataMiddleware&lt;/code&gt; safely handles drive names in paths on Windows.&lt;/li&gt;
+&lt;li&gt;The reloader no longer causes an &lt;code&gt;Exec format error&lt;/code&gt; in many common
+situations.&lt;/li&gt;
+&lt;li&gt;The reloader works around an issue when using the pydev debugger.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="security-fix-for-shareddatamiddleware-on-windows"&gt;Security fix for &lt;code&gt;SharedDataMiddleware&lt;/code&gt; on Windows&lt;/h2&gt;&lt;p&gt;Prior to 0.15.5, it was possible for a third party to potentially access
+arbitrary files when the application used &lt;code&gt;SharedDataMiddleware&lt;/code&gt; on
+Windows. This issue was assigned &lt;a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14322"&gt;CVE-2019-14322&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Due to the way Python's &lt;code&gt;os.path.join()&lt;/code&gt; function works on Windows, a
+path segment with a drive name will change the drive of the final path.
+This was &lt;a href="/blog/flask-werkzeug-0-12-2-security-release/"&gt;previously addressed&lt;/a&gt; in the &lt;code&gt;safe_join()&lt;/code&gt; function in
+&lt;a href="/blog/flask-werkzeug-0-12-2-security-release/"&gt;Werkzeug 0.12.2&lt;/a&gt;, but &lt;code&gt;SharedDataMiddleware&lt;/code&gt; used a separate
+implementation and so was not secured by the previous fix.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;SharedDataMiddlware&lt;/code&gt; now uses &lt;code&gt;safe_join()&lt;/code&gt; when fetching requested
+files. Projects using &lt;code&gt;SharedDataMiddleware&lt;/code&gt; on Windows should update
+as soon as possible to receive the fix.&lt;/p&gt;
+&lt;p&gt;Thank you to &lt;a href="mailto:byemre.ovunc@gmail.com"&gt;Emre Övünç&lt;/a&gt; and &lt;a href="mailto:security@odoo.com"&gt;Olivier Dony&lt;/a&gt; for responsibly
+reporting the issue. If you think you have discovered a security issue
+in Werkzeug or another of the Pallets projects, please email
+&lt;a href="mailto:security@palletsprojects.com"&gt;security@palletsprojects.com&lt;/a&gt; with details.&lt;/p&gt;
+&lt;h2 id="install-or-upgrade"&gt;Install or Upgrade&lt;/h2&gt;&lt;p&gt;Install from &lt;a href="https://pypi.org/project/Werkzeug/"&gt;PyPI&lt;/a&gt; with pip:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install -U Werkzeug
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+    <link href="https://aaasejuniorboard.com/blog/werkzeug-0-15-5-released/" rel="alternate"/>
+  </entry>
+</feed>

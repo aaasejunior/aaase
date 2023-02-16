@@ -1,0 +1,210 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/end-python2-prereleases/">
+<meta property="og:title" content="New Flask, Jinja2, Click, Werkzeug, ItsDangerous, and MarkupSafe major release candidates">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>New Flask, Jinja2, Click, Werkzeug, ItsDangerous, and MarkupSafe major release candidates | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+  <div class="blog-post">
+  
+    <h2>New Flask, Jinja2, Click, Werkzeug, ItsDangerous, and MarkupSafe major release candidates</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/pdgjones">Philip Jones</a>
+    
+    on 2021-04-29
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>The Pallets team is pleased to announce that release candidates are
+now available for the next major version of each project.</p>
+<p>Check out the changelogs for every project to see what's new:</p>
+<ul>
+<li><a href="https://flask.palletsprojects.com/en/master/changes#version-2-0-0">Flask 2.0</a></li>
+<li><a href="https://jinja.palletsprojects.com/en/master/changes/#version-3-0-0">Jinja2 3.0</a></li>
+<li><a href="https://click.palletsprojects.com/en/master/changes/#version-8-0">Click 8.0</a></li>
+<li><a href="https://werkzeug.palletsprojects.com/en/master/changes/#version-2-0-0">Werkzeug 2.0</a></li>
+<li><a href="https://itsdangerous.palletsprojects.com/en/master/changes/#version-2-0-0">ItsDangerous 2.0</a></li>
+<li><a href="https://markupsafe.palletsprojects.com/en/master/changes/#version-2-0-0">MarkupSafe 2.0</a></li>
+</ul>
+<p>Please help us prepare for the final release by testing the prerelease
+versions and reporting any issues you have. To upgrade to pre-releases
+with pip, use the <code>--pre</code> flag, e.g.:</p>
+<pre><code>pip install -U --pre Flask
+</code></pre>
+<p>These new major versions all drop support for Python 2 and 3.5,
+requiring Python 3.6 as the minimum supported version.</p>
+<h2 id="release-highlights">Release highlights</h2><p>These are a few highlights, see the changelogs linked above for the
+full release details. More detailed posts about each project's
+highlights will be made with the final releases.</p>
+<ul>
+<li>All projects (Jinja coming soon) now provide type hints.</li>
+<li>Flask gains limited <code>async</code>/<code>await</code> support.</li>
+<li>Flask supports nested blueprints.</li>
+<li>Flask tells the browser to cache static files more intelligently, so
+changes to CSS or images show up immediately.</li>
+<li>Flask introduces short form route decorators, such as <code>@app.post()</code>
+as a shortcut for <code>@app.route(methods=["POST"])</code>.</li>
+<li>Click's shell completion system has been rewritten.</li>
+<li>Click will now prompt for values where they are omitted.</li>
+<li>Werkzeug now provides <code>send_file</code> and <code>send_from_directory</code> helpers.</li>
+<li>Werkzeug's test client always returns a <code>Response</code> object.</li>
+<li>Werkzeug's multipart parsing performance increases by a factor of 15.</li>
+</ul>
+<h2 id="release-date">Release date</h2><p>The Pallets team is aiming to release on or before PyCon 2021, i.e. a
+target release date of the 11th of May 2021.</p>
+
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/end-python2-prereleases/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

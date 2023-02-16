@@ -1,0 +1,600 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/page/2/">
+<meta property="og:title" content="Blog">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>Blog | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li class=active><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/flask-1-1-released/">Flask 1.1 Released</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-07-04
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>The Pallets team is pleased to release <a href="/p/flask/">Flask</a> 1.1. The
+latest version is 1.1.1. Version 1.0.4 was also released.</p>
+<ul>
+<li>Drop support for Python 3.4.</li>
+<li>Bump minimum Werkzeug version to 0.15.</li>
+<li>The way error handlers for <code>InternalServerError</code> and <code>500</code> work has
+been made more consistent. See below for more information.</li>
+<li><code>app.logger</code> once again takes the same name as <code>app.name</code>, reverting
+1.0.x's behavior of hard-coding <code>"flask.app"</code>. See below for more
+information.</li>
+<li><code>jsonify</code> supports Python's <a href="https://docs.python.org/3/library/dataclasses.html"><code>dataclasses</code></a>.</li>
+<li>Returning a <code>dict</code> from a view function will produce a JSON
+response. This makes it even easier to get started building an API.</li>
+<li>A clearer error message is shown when a view returns an unsupported
+type.</li>
+<li>URL routing is performed after the request context is pushed. This
+allows custom URL converters to access <code>current_app</code> and <code>request</code>.
+This makes it possible to implement converters such as one that
+queries the database for a model based on the ID in the URL.</li>
+<li>CLI commands can be registered with blueprints using the new
+<code>bp.cli</code> attribute. These will be available as nested commands, for
+example <code>flask user create</code>.</li>
+</ul>
+<p><a href="https://flask.palletsprojects.com/en/1.1.x/changelog/"><strong>Read the changelog</strong></a>
+for the full list of changes. Be sure to check the notes for the 1.0.x
+versions as well.</p>
+<h2 id="change-to-error-handling">Change to Error Handling</h2><p>Prior to 1.0, unhandled errors caused a generic <code>InternalServerError</code> to
+be returned, but only the handler for <code>500</code> was looked up for that, and
+the original error was passed to it. 1.0 made <code>500</code> an alias for
+<code>InternalServerError</code>, but these inconsistencies caused confusion over
+what errors were passed to what handlers.</p>
+<p>As of 1.1, an error handler registered for <code>InternalServerError</code> or
+<code>500</code> means the same thing in all cases. It will always be passed an
+instance of <code>InternalServerError</code>, even if it was caused by an unhandled
+error of another type. The original error is available as
+<code>e.original_exception</code>.</p>
+<p>If your project uses a <code>500</code> error handler that expects any exception to
+be passed to it, it should use <code>e.original_exception</code> instead of <code>e</code>.</p>
+<h2 id="change-to-logging">Change to Logging</h2><p>In 1.0, Flask's logging setup was greatly simplified. Part of that was
+hard-coding the name <code>"flask.app"</code> for the logger. However, that made it
+less clear whether Flask or the app was doing the logging, and made it
+impossible to distinguish between multiple apps in logs.</p>
+<p>As of 1.1, <code>app.logger</code> again takes the same name as <code>app.name</code>. Flask
+will warn you if it detects logging configuration for <code>"flask"</code> or
+<code>"flask.app"</code> so you can rename that configuration appropriately.</p>
+<p>For example, if your project is named <code>example.py</code> and you initialize
+your Flask app as <code>Flask(__name__)</code>, then the logger will be named
+<code>"example"</code>.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Flask/">PyPI</a> with pip:</p>
+<pre><code>pip install -U Flask
+</code></pre>
+<h2 id="donate">Donate</h2><p>Pallets now accepts donations through the PSF in order to support our
+efforts to maintain the projects and grow the community. We greatly
+appreciate any support you can provide.
+<a href="/donate"><strong>Click here to donate.</strong></a></p>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/werkzeug-0-15-3-released/">Werkzeug 0.15.3 Released</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-05-14
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      ,
+        <a href="/blog/categories/security/">Security</a>
+      
+    
+  </p>
+  <p>Werkzeug 0.15.3 has been released, followed closely by 0.15.4. Both fix
+bugs and compatibility issues. The <a href="https://werkzeug.palletsprojects.com/en/0.15.x/changes/#version-0-15-3">changelog</a> lists the changes in
+detail, which include:</p>
+<ul>
+<li>The debugger pin is unique per Docker container.</li>
+<li>Fix issues with the arguments to the <code>Unauthorized</code> HTTP exception.</li>
+<li>Fix <code>ProfilerMiddleware</code> filenames, and get <code>LintMiddleware</code> working
+on Python 3.</li>
+<li>Bytes passed to URLs will be correctly decoded rather than having a
+<code>b</code> prefix.</li>
+</ul>
+<h2 id="debugger-pin-security">Debugger Pin Security</h2><p>A minor security issue was addressed in this release. The debugger
+generates a unique pin per host to prevent unauthorized code execution.
+However, in Docker this pin would be identical across all containers.
+This release ensures each container uses a unique pin.</p>
+<p>Thank you to Nikita Tikhomirov for responsibly reporting the issue. If
+you think you have discovered a security issue in Werkzeug or another of
+the Pallets projects, please email <a href="mailto:security@palletsprojects.com">security@palletsprojects.com</a> with
+details.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Werkzeug/">PyPI</a> with pip:</p>
+<pre><code>pip install -U Werkzeug
+</code></pre>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/flask-sqlalchemy-2-4-0-released/">Flask-SQLAlchemy 2.4.0 Released</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/RandySyring">Randy Syring</a>
+    
+    on 2019-04-24
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>Flask-SQLAlchemy 2.4.0. has been released. The
+<a href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/changelog/#version-2-4-0">changelog</a>
+lists the changes in detail, which include:</p>
+<ul>
+<li>Make SQLAlchemy engine configuration more flexible</li>
+<li>Address SQLAlchemy 1.3 deprecations</li>
+</ul>
+<h2 id="deprecation-warnings">Deprecation Warnings</h2><p>New deprecation warnings have been added for configuration and <code>__init__</code> params that are no longer
+needed due to the engine configuration now being more customizable.  Those options will be removed
+in release 3.0.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Flask-SQLAlchemy/">PyPI</a> with pip:</p>
+<pre><code>pip install -U Flask-SQLAlchemy
+</code></pre>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/jinja-2-10-1-released/">Jinja 2.10.1 Security Release</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-04-06
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      ,
+        <a href="/blog/categories/security/">Security</a>
+      
+    
+  </p>
+  <p>Jinja 2.10.1 has been released and includes a security-related fix. If
+you are using the Jinja <a href="http://jinja.pocoo.org/docs/2.10/sandbox/">sandboxed environment</a> you are encouraged to
+upgrade.</p>
+<p>MITRE has assigned <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-10906">CVE-2019-10906</a> to this issue.</p>
+<p>Thank you to <a href="https://brianwel.ch">Brian Welch</a> for responsibly reporting the issue, and to
+<a href="https://twitter.com/mitsuhiko">Armin Ronacher</a> for writing the fix.</p>
+<p>The sandbox is used to restrict what code can be evaluated when
+rendering untrusted, user-provided templates. Due to the way string
+formatting works in Python, the <code>str.format_map</code> method could be used to
+escape the sandbox.</p>
+<p>This issue was previously addressed for the <code>str.format</code> method in
+<a href="/blog/jinja-281-released/">Jinja 2.8.1</a>, which discusses the issue in detail. However, the
+less-common <code>str.format_map</code> method was overlooked. This release applies
+the same sandboxing to both methods.</p>
+<p>If you cannot upgrade Jinja, you can override the <code>is_safe_attribute</code>
+method on the sandbox and explicitly disallow the <code>format_map</code>
+method on string objects.</p>
+<h2 id="reporting-security-issues">Reporting Security Issues</h2><p>If you think you have discovered a security issue in Jinja or another of
+the Pallets projects, please email <a href="mailto:security@palletsprojects.com">security@palletsprojects.com</a> with
+details.</p>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/werkzeug-0-15-2-released/">Werkzeug 0.15.2 Released</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-04-02
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>Werkzeug 0.15.2 has been released. The
+<a href="https://werkzeug.palletsprojects.com/en/0.15.x/changes/#version-0-15-2">changelog</a>
+lists the changes in detail, which include:</p>
+<ul>
+<li>Fix an issue where code generation would cause coverage to fail.</li>
+<li>Fixed some issues with the new test client redirect code. If no
+cookies are stored, the cookie header is removed. Changes to the
+environ by the app don't affect the client.</li>
+<li>The "werkzeug" logger doesn't log messages twice if user code has
+already configured logging.</li>
+</ul>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Werkzeug/">PyPI</a> with pip:</p>
+<pre><code>pip install -U Werkzeug
+</code></pre>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/werkzeug-0-15-1-released/">Werkzeug 0.15.1 Released</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-03-21
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>Werkzeug 0.15.1 has been released. It fixes a bug in the argument order
+for the <code>Unauthorzed</code> HTTP exception. <code>description</code> is now the first
+argument again.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Werkzeug/">PyPI</a> with pip:</p>
+<pre><code>pip install -U Werkzeug
+</code></pre>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/werkzeug-0-15-0-released/">Werkzeug 0.15.0 Released</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-03-19
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>The Pallets team is pleased to release Werkzeug 0.15.0. This represents
+over a year of work from the community and maintainers, and as such
+there is an unusually long list of changes. Some of the notable ones
+are listed below, but there are many more throughout the framework.
+<a href="https://werkzeug.palletsprojects.com/en/0.15.x/changes/">Read the full changelog</a>
+to understand what changes may affect your code when upgrading.</p>
+<ul>
+<li>Building URLs is ~7x faster.</li>
+<li>Redirects now use HTTP code 308 by default. This preserves the method
+and form data.</li>
+<li><code>int</code> and <code>float</code> URL converters can handle negative numbers.</li>
+<li>The debugger saw a number of improvements. Python 3's chained
+exceptions are correctly displayed and logged. Frames of user code
+are highlighted to make it easier to read tracebacks.</li>
+<li>The reloader is much better at detecting how to re-run itself. It
+handles <code>python -m</code> as well as non-Python executable scripts.</li>
+<li>The test client takes a <code>json</code> parameter, and the response class has
+a <code>get_json</code> method. This makes testing JSON APIs much more
+straightforward.</li>
+<li>URLs with Unicode or percent-escapes are handled better. Quoting when
+converting between URIs and IRIs is more consistent, and the unquoted
+URL is logged by the dev server rather than showing percent escapes.</li>
+<li>Deprecation warnings have been added throughout the code in
+preparation for version 1.0.</li>
+<li>Werkzeug now uses <a href="https://pre-commit.com/">pre-commit</a>, <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/asottile/reorder_python_imports">reorder-python-imports</a>,
+and <a href="http://flake8.pycqa.org/en/latest/">flake8</a> to provide consistent code formatting. The code also
+moved to a <code>src</code> directory layout.</li>
+<li>And much more!</li>
+</ul>
+<h2 id="werkzeug-contrib-has-been-deprecated"><code>werkzeug.contrib</code> has been deprecated</h2><p>The code under the <code>werkzeug.contrib</code> package has been deprecated. In
+version 1.0, code will either be moved into <code>werkzeug</code> core, or will be
+removed completely. Contrib started as a place to put code that wasn't
+clear where it belonged. In the 12 years since Werkzeug started, the
+packaging ecosystem and Werkzeug's codebase have evolved. The contrib
+code has not been widely maintained, often having better implementations
+elsewhere or no longer being required.</p>
+<ul>
+<li><code>ProxyFix</code>, <code>LintMiddleware</code>, and <code>ProfilerMiddleware</code> have moved into
+<code>werkzeug.middleware</code>.</li>
+<li><code>securecookie</code> and <code>sessions</code> have been extracted to the
+<a href="https://github.com/pallets/secure-cookie">pallets/secure-cookie</a>
+repository.</li>
+<li><code>cache</code> has been extracted to the
+<a href="https://github.com/pallets/cachelib">pallets/cachelib</a> repository.</li>
+<li>Everything else is deprecated.</li>
+</ul>
+<h2 id="deprecation-warnings">Deprecation Warnings</h2><p>Besides contrib, many other parts of Werkzeug have been marked, either
+explicitly or implicitly, as deprecated, for many years. This release
+ensures that every occurrence issues a clear deprecation warning that
+mentions when the code will be removed. Currently, everything marked
+deprecated is slated to be removed in version 1.0.</p>
+<ul>
+<li>Unused compatibility imports for code that was moved to another module
+within Werkzeug. This code is still available, but should be imported
+from the correct location.</li>
+<li>Middleware in <code>werkzeug.wsgi</code> has moved to <code>werkzeug.middleware</code>.</li>
+<li>The <code>werkzeug.wrappers</code> module was converted to a package of more
+specific modules. Imports for classes that were publicly documented in
+the previous version will work without change.</li>
+</ul>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Werkzeug/">PyPI</a> with pip:</p>
+<pre><code>pip install -U Werkzeug
+</code></pre>
+<h2 id="donate">Donate</h2><p>The Pallets organization has joined the Python Software Foundation. We
+now accept donations through the PSF in order to support our efforts to
+maintain the projects and grow the community.
+<a href="https://psfmember.org/civicrm/contribute/transact?reset=1&amp;id=20">Click here to donate.</a></p>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/markupsafe-1-1-1-released/">MarkupSafe 1.1.1 Released</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-02-23
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>This is a bugfix release. <a href="https://markupsafe.palletsprojects.com/en/1.1.x/changes/">Changelog</a></p>
+<ul>
+<li>If an <code>__html__</code> method raised an exception, Python would segfault when using MarkupSafe's C speedups. Now the exception will propagate correctly rather than crashing.</li>
+</ul>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/MarkupSafe">PyPI</a> with pip:</p>
+<pre><code>pip install -U MarkupSafe
+</code></pre>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/community-survey-2019/">Take the Pallets / Flask Community Survey</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-01-29
+      in
+      
+        <a href="/blog/categories/meta/">Meta</a>
+      
+    
+  </p>
+  <p>One of my goals as a Pallets maintainer is to build the community around our projects. The Pallets projects (Flask, Jinja, Click, etc.) are downloaded millions of times each month, but it's hard to get a clear picture of what our users do and want with downloads stats only. We'd like to learn about you and your projects. Knowing more about our community will help us decide what to focus on to grow the Pallets projects.</p>
+<p><a href="https://goo.gl/forms/CtZrOgWUa8gy1FNz2"><strong>Click here to take our Community Survey.</strong></a></p>
+<p>Please share the link with friends, coworkers, and the internet!  We're looking forward to seeing everyone's responses! You can follow <a href="https://twitter.com/PalletsTeam">https://twitter.com/PalletsTeam</a> or this blog to get updates about Pallets, including the survey results.</p>
+
+  </div>
+
+  
+    
+  <div class="blog-post">
+  
+    <h2><a href="/blog/markupsafe-1-1-0-released/">MarkupSafe 1.1.0 Released</a></h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2018-11-05
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p><a href="https://markupsafe.palletsprojects.com/en/1.1.x/changes/">Changelog</a></p>
+<ul>
+<li>Dropped support for Python 2.6 and 3.3.</li>
+<li>Using newer CPython APIs gave the C extension a 1.5x speedup on Python 3. Python 2 will still get the same speed as before, but you should consider upgrading if possible.</li>
+<li>The <code>escape</code> function uses the <code>__html__</code> method on an object if it's available. It will now ensure that result is wrapped in the <code>Markup</code> class, for consistency with other behavior.</li>
+</ul>
+<h2 id="platform-wheels">Platform Wheels</h2><p>Installing from PyPI with pip will now install a precompiled wheel if available. Wheels have been compiled for supported CPython versions on Linux, Mac, and Windows.</p>
+<p>MarkupSafe comes with a C extension that adds a significant speedup to escaping. However, if a compiler or headers aren't available, the install will fall back to a native Python implementation. Previously, the user would see no indication that they didn't get the speedups, or would see confusing error messages even though the install succeeded. Now, many more users will be able to take advantage of the speedups provided by MarkupSafe without extra configuration.</p>
+<h2 id="documentation">Documentation</h2><p>Full documentation has been added in place of the previous README. It is available through Read the Docs at <a href="https://markupsafe.palletsprojects.com/">https://markupsafe.palletsprojects.com/</a>.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/MarkupSafe">PyPI</a> with pip:</p>
+<pre><code>pip install -U MarkupSafe
+</code></pre>
+<h2 id="donate">Donate</h2><p>We accept donations through the Python Software Foundation in order to support our efforts to maintain the projects and grow the community. <a href="/donate">Click here to donate.</a></p>
+
+  </div>
+
+  
+
+  
+  <div class="pagination">
+    
+      <a href="/blog/">&laquo; Previous</a>
+    
+    | 2 |
+    
+      <a href="/blog/page/3/">Next &raquo;</a>
+    
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

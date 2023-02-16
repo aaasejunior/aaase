@@ -1,0 +1,199 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/click-7-0-released/">
+<meta property="og:title" content="Click 7.0 Released">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>Click 7.0 Released | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+  <div class="blog-post">
+  
+    <h2>Click 7.0 Released</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2018-09-25
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>The Pallets team is pleased to release Click 7.0. Thank you to everyone who contributed online and in person at the PyCon US 2018 sprint! With the help of the community as well as some new maintainers, we've managed to resolve hundreds of long standing issues and pull requests.</p>
+<p>Due to the length of time since the last release, there are a significant number of new features and fixes. <a href="https://click.palletsprojects.com/en/master/changelog/#version-7-0">Check out the changelog</a> for a list of all code changes and links to the relevant issues. Changes include:</p>
+<ul>
+<li>Shell autocompletion has improved in a number of areas.<ul>
+<li>Native ZSH completion was added, and supports its enhanced parameter documentation.</li>
+<li>The choice type can be completed.</li>
+<li>Completion correctly handles chained commands, spaces, defaults, and partial completions.</li>
+<li>Parameters can provide a callback to customize completion.</li>
+</ul>
+</li>
+<li>On Windows <code>click.echo</code> can now output more than 16k characters in one call. On Windows 7, a 64k limit on binary stream output is also worked around.</li>
+<li><code>click.getchar</code> returns Unicode on Windows.</li>
+<li>When piping input and output, more cases of closed pipes are detected and handled instead of raising errors.</li>
+<li>The <code>CliRunner</code> used for testing separates stdout and stderr.</li>
+<li>New <code>DateTime</code> and <code>FloatRange</code> parameter types.</li>
+<li>Flags to mark a parameter as hidden or deprecated.</li>
+<li>Numerous improvements and fixes to i/o, help, parameters, and testing.</li>
+</ul>
+<h2 id="read-the-docs">Read the Docs</h2><p>Click is the first Pallets project to move its docs to Read the Docs. Our projects currently use a custom builder and hosting, but this became too difficult with limited maintainer time. Thank you to everyone at RTD who helped with the transition!</p>
+<p>The new URL for the docs is <a href="https://click.palletsprojects.com/">https://click.palletsprojects.com/</a>. The old <a href="http://click.pocoo.org/">http://click.pocoo.org/</a> domain will redirect to the new one while we continue to migrate, but will eventually go away. Please use the new URL going forward.</p>
+<p>Click's docs use a custom Sphinx theme and extensions. As part of the move, these were extracted to a separate Python package. Install <a href="https://pypi.org/project/Pallets-Sphinx-Themes">Pallets-Sphinx-Themes</a> to use Click's theme when writing extensions for a more cohesive look.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Click">PyPI</a> with pip:</p>
+<pre><code>pip install -U Click
+</code></pre>
+<h2 id="get-involved">Get Involved</h2><p>Click and the Pallets team depends on you, the community. Whether you report issues, write documentation, create patches, or answer questions, we appreciate all the help you provide. <a href="https://github.com/pallets/click">Star the project on GitHub</a> to show support, and <a href="https://help.github.com/articles/watching-and-unwatching-repositories/">watch</a> the repository to see discussions and pull requests as they happen.</p>
+<h2 id="donate">Donate</h2><p>We now accept donations through the Python Software Foundation in order to support our efforts to maintain the projects and grow the community. <a href="/donate"><strong>Click here to donate.</strong></a></p>
+
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/click-7-0-released/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

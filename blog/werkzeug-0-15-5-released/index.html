@@ -1,0 +1,201 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/werkzeug-0-15-5-released/">
+<meta property="og:title" content="Werkzeug 0.15.5 Released">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>Werkzeug 0.15.5 Released | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+  <div class="blog-post">
+  
+    <h2>Werkzeug 0.15.5 Released</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-07-17
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      ,
+        <a href="/blog/categories/security/">Security</a>
+      
+    
+  </p>
+  <p>Werkzeug 0.15.5 has been released, containing bug and security fixes.
+The <a href="https://werkzeug.palletsprojects.com/en/0.15.x/changes/#version-0-15-5">changelog</a> lists the changes in detail, which include:</p>
+<ul>
+<li><code>SharedDataMiddleware</code> safely handles drive names in paths on Windows.</li>
+<li>The reloader no longer causes an <code>Exec format error</code> in many common
+situations.</li>
+<li>The reloader works around an issue when using the pydev debugger.</li>
+</ul>
+<h2 id="security-fix-for-shareddatamiddleware-on-windows">Security fix for <code>SharedDataMiddleware</code> on Windows</h2><p>Prior to 0.15.5, it was possible for a third party to potentially access
+arbitrary files when the application used <code>SharedDataMiddleware</code> on
+Windows. This issue was assigned <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14322">CVE-2019-14322</a>.</p>
+<p>Due to the way Python's <code>os.path.join()</code> function works on Windows, a
+path segment with a drive name will change the drive of the final path.
+This was <a href="/blog/flask-werkzeug-0-12-2-security-release/">previously addressed</a> in the <code>safe_join()</code> function in
+<a href="/blog/flask-werkzeug-0-12-2-security-release/">Werkzeug 0.12.2</a>, but <code>SharedDataMiddleware</code> used a separate
+implementation and so was not secured by the previous fix.</p>
+<p><code>SharedDataMiddlware</code> now uses <code>safe_join()</code> when fetching requested
+files. Projects using <code>SharedDataMiddleware</code> on Windows should update
+as soon as possible to receive the fix.</p>
+<p>Thank you to <a href="mailto:byemre.ovunc@gmail.com">Emre Övünç</a> and <a href="mailto:security@odoo.com">Olivier Dony</a> for responsibly
+reporting the issue. If you think you have discovered a security issue
+in Werkzeug or another of the Pallets projects, please email
+<a href="mailto:security@palletsprojects.com">security@palletsprojects.com</a> with details.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Werkzeug/">PyPI</a> with pip:</p>
+<pre><code>pip install -U Werkzeug
+</code></pre>
+
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/werkzeug-0-15-5-released/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

@@ -1,0 +1,226 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/jinja-2-9-released/">
+<meta property="og:title" content="Jinja 2.9 Released">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>Jinja 2.9 Released | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+  <div class="blog-post">
+  
+    <h2>Jinja 2.9 Released</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/mitsuhiko">Armin Ronacher</a>
+    
+    on 2017-01-07
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>After a long time of no changes a new release, 2.9 codename “Derivation” of the Jinja template engine for Python is out. This change is probably the biggest release in Jinja2's history and it requires a bit of explanation of why it happened and why it happened now. But first let's cover the big changes in it.</p>
+<h2 id="new-identifier-tracking">New Identifier Tracking</h2><p>This appears to be an under the hood change because it effectively just changes the internal algorithm that Jinja2 uses to map it's own scoping rules onto the Python interpreter's scoping rules but it has wide ranging consequences. The original tracking issue <a href="https://github.com/pallets/jinja/issues/19">goes back to 2011</a> and was created as a long running TODO item. There were a few reasons why it was implemented this way but over the years it became clearer and clearer that the method chosen for mapping identifiers is just causing too many issues. The reason it was not changed was that the worries were too big that people accidentally relied on such bugs.</p>
+<p>However with improved support for pinning to older versions of Python packages and the fact that people no longer use linux distribution provided packages much the worries about greater changes are heavily reduced. With Jinja 2.9 the identifier tracking was completely changed which should squash pretty much all the weird behaviors developers might have encountered and also enabled support for related improvements. In particular the new identifier tracking generalized the context behavior for includes and imports.</p>
+<p>In the ideal case you won't notice anything other than that some constructs are possible now that caused errors in the past.</p>
+<h2 id="python-3-feature-support">Python 3 Feature Support</h2><p>While Jinja2 supported Python 3 for years now it never really embraced functionality that the language provides on 3.x that it does not do on 2.x. Largely that is caused by the fact that we want templates to be compatible between 2.x and 3.x (this is true only for as long as template variables are restricted to ASCII characters). However 3.6 now added async generators which permits Jinja2 to fully support the <code>async</code> and <code>await</code> keywords on 3.6 and later.</p>
+<p>In particular it means that you can now return coroutines from functions passed to Jinja2 templates and the template engine will automatically await them. Likewise all filters were updated to work with iterators as well as async iterators alike.</p>
+<p>Additionally Jinja2 now emits <code>generator_stop</code> as a future flag which means that accidentally emitting <code>StopIteration</code> from a filter or other code will no longer cause the template to just stop rendering silently. This was enabled by <a href="https://www.python.org/dev/peps/pep-0479/">PEP 479</a>.</p>
+<h2 id="policy-framework">Policy Framework</h2><p>Jinja2 now has an internal policy configuration which permits one to centrally reconfigure behavior of filters and other things. While so far not much can be reconfigured it will greatly support future improvements. This also finally allows us to provide a default <code>tojson</code> filter which previously was only available through Flask or other frameworks. Through the policy configuration the particular form of JSON serialization can be customized and replaced.</p>
+<h2 id="full-changelog">Full Changelog</h2><ul>
+<li>Change cache key definition in environment. This fixes a performance
+regression introduced in 2.8.</li>
+<li>Added support for <code>generator_stop</code> on supported Python versions
+(Python 3.5 and later)</li>
+<li>Corrected a long standing issue with operator precedence of math operations
+not being what was expected.</li>
+<li>Added support for Python 3.6 async iterators through a new async mode.</li>
+<li>Added policies for filter defaults and similar things.</li>
+<li>urlize now sets "rel noopener" by default.</li>
+<li>Support attribute fallback for old-style classes in 2.x.</li>
+<li>Support toplevel set statements in extend situations.</li>
+<li>Restored behavior of Cycler for Python 3 users.</li>
+<li>Subtraction now follows the same behavior as other operators on undefined
+values.</li>
+<li><code>map</code> and friends will now give better error messages if you forgot to
+quote the parameter.</li>
+<li>Depend on MarkupSafe 0.23 or higher.</li>
+<li>Improved the <code>truncate</code> filter to support better truncation in case
+the string is barely truncated at all.</li>
+<li>Change the logic for macro autoescaping to be based on the runtime
+autoescaping information at call time instead of macro define time.</li>
+<li>Ported a modified version of the <code>tojson</code> filter from Flask to Jinja2
+and hooked it up with the new policy framework.</li>
+<li>Block sets are now marked <code>safe</code> by default.</li>
+<li>On Python 2 the asciification of ASCII strings can now be disabled with
+the <code>compiler.ascii_str</code> policy.</li>
+<li>Tests now no longer accept an arbitrary expression as first argument but
+a restricted one.  This means that you can now properly use multiple
+tests in one expression without extra parentheses.  In particular you can
+now write <code>foo is divisibleby 2 or foo is divisibleby 3</code>
+as you would expect.</li>
+<li>Greatly changed the scoping system to be more consistent with what template
+designers and developers expect.  There is now no more magic difference
+between the different include and import constructs.  Context is now always
+propagated the same way.  The only remaining differences is the defaults
+for <code>with context</code> and <code>without context</code>.</li>
+<li>The <code>with</code> and <code>autoescape</code> tags are now built-in.</li>
+<li>Added the new <code>select_autoescape</code> function which helps configuring better
+autoescaping easier.</li>
+</ul>
+<h2 id="why-an-update-now">Why an Update now?</h2><p>One of the reasons Jinja2 was lying largely dormant is that it's always scary to touch something so many people use. While bugs were known for quite some time it requires careful changes to not change all the template code out there. In particular once salt and ansible started using Jinja it became a big emotional burden to do changes on it.</p>
+<p>However it turns out that emotional burden does not get smaller for as long as those bugs are in there. Going in and cleaning up the behavior actually turns out to be healthier in the long run. Now even if this release introduces regressions in behavior, the internal code quality is much improved and reasoning about the runtime and compiler is a lot easier now.</p>
+<p>On a personal note I'm happy to see how popular Jinja has become and I hope that with this release it becomes more enjoyable to write Jinja templates.</p>
+<p><em>Aside: if you are downloading Jinja2 you will actually pull 2.9.1 because there was a regression in 2.9 that was only found after releasing it. In an ironic twist it was found when this website attempted to render a complex template with Jinja 2.9 on the build server.</em></p>
+
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/jinja-2-9-released/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

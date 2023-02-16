@@ -1,0 +1,344 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/governance/sourcecode/python-styleguide/">
+<meta property="og:title" content="Python Styleguide">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>Hello | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      
+  <ul class="tree-nav nocontent">
+    
+    <li><a href="/governance/">Bylaws</a>
+    
+      </li>
+    
+    
+      <li><a href="/governance/licenses-and-copyright/">Name</a>
+        
+    
+      <li><a href="/governance/code-of-conduct/">Name</a>
+        
+    
+      <li><a href="/governance/resources/">Resources</a>
+        
+    
+      <li><a href="/governance/sourcecode/">Sourcecode</a>
+        
+        <ul>
+      <li><a href="/governance/sourcecode/javascript-styleguide/">JavaScript Styleguide</a>
+        
+    
+      <li class="active"><a href="/governance/sourcecode/python-styleguide/">Python Styleguide</a>
+        
+        <ul></ul>
+        
+    </ul>
+        
+    
+      <li><a href="/governance/structure/">Structure</a>
+        
+    
+    </li>
+  </ul>
+
+
+      
+      <div class="visible-md-block visible-lg-block">
+        <h4>This Page</h4>
+        <ul class="toc">
+        
+          <li><a href="#general-layout">General Layout</a><ul>
+          <li><a href="#indentation">Indentation</a>
+        
+          <li><a href="#maximum-line-length">Maximum line length</a>
+        
+          <li><a href="#continuing-long-statements">Continuing long statements</a>
+        
+          <li><a href="#blank-lines">Blank lines</a>
+        </ul>
+        
+          <li><a href="#expressions-and-statements">Expressions and Statements</a><ul>
+          <li><a href="#general-whitespace-rules">General whitespace rules</a>
+        </ul>
+        
+          <li><a href="#naming-conventions">Naming Conventions</a>
+        
+          <li><a href="#docstrings">Docstrings</a>
+        
+          <li><a href="#comments">Comments</a>
+        
+        </ul>
+      </div>
+      
+    </div>
+    <div class="col-sm-9">
+      <h1>Python Styleguide</h1>
+      <p>The Pallets styleguide applies to all Pallets projects, including
+Flask.  This styleguide is a requirement for patches to the projects and a
+recommendation for other code in the ecosystem.</p>
+<p>In general the styleguide closely follows <a href="https://www.python.org/dev/peps/pep-0008/">PEP
+8</a> with some small
+differences and extensions.</p>
+<h2 id="general-layout">General Layout</h2><p>These are the general code layout rules.</p>
+<h3 id="indentation">Indentation</h3><p>4 real spaces.  No tabs, no exceptions.</p>
+<h3 id="maximum-line-length">Maximum line length</h3><p>79 characters with a soft limit for 84 if absolutely necessary.  Try
+to avoid deeply nested code by cleverly placing <code>break</code>, <code>continue</code> and
+<code>return</code> statements.</p>
+<h3 id="continuing-long-statements">Continuing long statements</h3><p>To continue a statement, use backslashes.  Align the next line with the
+last dot or equal sign, or indent four spaces.</p>
+<div class="hll"><pre><span></span><span class="n">this_is_a_very_long</span><span class="p">(</span><span class="n">function_call</span><span class="p">,</span> <span class="s1">&#39;with many parameters&#39;</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">that_returns_an_object_with_an_attribute</span>
+
+<span class="n">MyModel</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">MyModel</span><span class="o">.</span><span class="n">scalar</span> <span class="o">&gt;</span> <span class="mi">120</span><span class="p">)</span> \
+             <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">MyModel</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span> \
+             <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+<p>When breaking in a statement with parentheses or braces, align to the
+braces.</p>
+<div class="hll"><pre><span></span><span class="n">this_is_a_very_long</span><span class="p">(</span><span class="n">function_call</span><span class="p">,</span> <span class="s1">&#39;with many parameters&#39;</span><span class="p">,</span>
+                    <span class="mi">23</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;and even more&#39;</span><span class="p">)</span>
+</pre></div>
+<p>For lists or tuples with many items, break immediately after the
+opening brace.</p>
+<div class="hll"><pre><span></span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;this is the first&#39;</span><span class="p">,</span> <span class="s1">&#39;set of items&#39;</span><span class="p">,</span> <span class="s1">&#39;with more items&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;to come in this line&#39;</span><span class="p">,</span> <span class="s1">&#39;like this&#39;</span>
+<span class="p">]</span>
+</pre></div>
+<h3 id="blank-lines">Blank lines</h3><p>Top level functions and classes are separated by two lines, everything
+else by one.  Do not use too many blank lines to separate logical
+segments in code.</p>
+<div class="hll"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello </span><span class="si">%s</span><span class="s1">!&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">goodbye</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;See you </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+</pre></div>
+<div class="hll"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This is a simple docstring&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">get_annoying_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;!!!!111&#39;</span>
+</pre></div>
+<h2 id="expressions-and-statements">Expressions and Statements</h2><p>These are some specific rules about how to deal with formatting of
+expressions and statements.</p>
+<h3 id="general-whitespace-rules">General whitespace rules</h3><ul>
+<li>No whitespace for unary operators that are not words
+(e.g.: <code>-</code>, <code>~</code> etc.) as well on the inner side of parentheses.</li>
+<li>Whitespace is placed between binary operators.</li>
+</ul>
+<p>Good:</p>
+<div class="hll"><pre><span></span><span class="n">exp</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.05</span>
+<span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">item_value</span> <span class="o">/</span> <span class="n">item_count</span><span class="p">)</span> <span class="o">*</span> <span class="n">offset</span> <span class="o">/</span> <span class="n">exp</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">my_dict</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
+</pre></div>
+<p>Bad:</p>
+<div class="hll"><pre><span></span><span class="n">exp</span> <span class="o">=</span> <span class="o">-</span> <span class="mf">1.05</span>
+<span class="n">value</span> <span class="o">=</span> <span class="p">(</span> <span class="n">item_value</span> <span class="o">/</span> <span class="n">item_count</span> <span class="p">)</span> <span class="o">*</span> <span class="n">offset</span> <span class="o">/</span> <span class="n">exp</span>
+<span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="n">item_value</span><span class="o">/</span><span class="n">item_count</span><span class="p">)</span><span class="o">*</span><span class="n">offset</span><span class="o">/</span><span class="n">exp</span>
+<span class="n">value</span><span class="o">=</span><span class="p">(</span> <span class="n">item_value</span><span class="o">/</span><span class="n">item_count</span> <span class="p">)</span> <span class="o">*</span> <span class="n">offset</span><span class="o">/</span><span class="n">exp</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[</span> <span class="n">index</span> <span class="p">]</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">my_dict</span> <span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
+</pre></div>
+<p>Yoda statements are a no-go.  Never compare constant with variable, always
+variable with constant:</p>
+<p>Good:</p>
+<div class="hll"><pre><span></span><span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;md5&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+<p>Bad:</p>
+<div class="hll"><pre><span></span><span class="k">if</span> <span class="s1">&#39;md5&#39;</span> <span class="o">==</span> <span class="n">method</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+<p>Comparisons:</p>
+<ul>
+<li>against arbitrary types: <code>==</code> and <code>!=</code></li>
+<li>against singletons with <code>is</code> and <code>is not</code> (eg: <code>foo is not
+None</code>)</li>
+<li>never compare something with <code>True</code> or <code>False</code> (for example never
+do <code>foo == False</code>, do <code>not foo</code> instead)</li>
+</ul>
+<p>Use negated containment checks: for instance <code>foo not in bar</code> instead of <code>not
+foo in bar</code></p>
+<p>For instance checks use <code>isinstance(a, C)</code> instead of <code>type(a) is C</code>, but
+try to avoid instance checks in general.  Check for features.</p>
+<h2 id="naming-conventions">Naming Conventions</h2><ul>
+<li>class names: <code>CamelCase</code>, with acronyms kept uppercase (<code>HTTPWriter</code>
+and not <code>HttpWriter</code>)</li>
+<li>variable names: <code>lowercase_with_underscores</code></li>
+<li>method and function names: <code>lowercase_with_underscores</code></li>
+<li>constants: <code>UPPERCASE_WITH_UNDERSCORES</code></li>
+<li>precompiled regular expressions: <code>name_re</code></li>
+</ul>
+<p>Protected members are prefixed with a single underscore.  Double
+underscores are reserved for mixin classes.</p>
+<p>If a name clashes with a keyword, append a trailing underscore.
+Clashes with builtins are allowed and <strong>must not</strong> be resolved by appending an
+underline to the variable name.  If the function needs to access a
+shadowed builtin, rebind the builtin to a different name instead.</p>
+<p>Function and method arguments:</p>
+<ul>
+<li>class methods: <code>cls</code> as first parameter</li>
+<li>instance methods: <code>self</code> as first parameter</li>
+<li>lambdas for properties might have the first parameter replaced
+with <code>x</code> like in <code>display_name = property(lambda x: x.real_name
+or x.username)</code></li>
+</ul>
+<h2 id="docstrings">Docstrings</h2><p>All docstrings are formatted with <a href="http://www.sphinx-doc.org/en/stable/rest.html">reStructuredText as understood by
+Sphinx</a>.
+Depending on the number of lines in the docstring, they are laid out
+differently.  If it's just one line, the closing triple quote is on the same
+line as the opening, otherwise the text is on the same line as the opening
+quote and the triple quote that closes the string on its own line.</p>
+<div class="hll"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This is a simple docstring&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">bar</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This is a longer docstring with so much information in</span>
+<span class="sd">    there that it spans three lines.  In this case the closing</span>
+<span class="sd">    triple quote is on its own line.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+<p>The module header consists of an utf-8 encoding declaration (if non ASCII
+letters are used, but it is recommended all the time) and a standard
+docstring:</p>
+<div class="hll"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    package.module</span>
+<span class="sd">    ~~~~~~~~~~~~~~</span>
+
+<span class="sd">    A brief description goes here.</span>
+
+<span class="sd">    :copyright: (c) YEAR by AUTHOR.</span>
+<span class="sd">    :license: LICENSE_NAME, see LICENSE_FILE for more details.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+<p>Please keep in mind that proper copyrights and license files are a requirement
+for approved Flask extensions.</p>
+<h2 id="comments">Comments</h2><p>Rules for comments are similar to docstrings.  Both are formatted with
+reStructuredText.  If a comment is used to document an attribute, put a
+colon after the opening pound sign (<code>#</code>).  If a comment is on the
+same line as code, use two spaces before the <code>#</code>.</p>
+<div class="hll"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1">#: the name of the user as unicode string</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+    <span class="c1">#: the sha1 hash of the password + inline salt</span>
+    <span class="n">pw_hash</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+
+    <span class="n">_groups</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># cache groups after loading</span>
+</pre></div>
+
+
+      
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/governance/sourcecode/python-styleguide/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

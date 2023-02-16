@@ -1,0 +1,184 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/itsdangerous-1-0-0-released/">
+<meta property="og:title" content="It&#39;s Dangerous 1.0.0 Released">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>It&#39;s Dangerous 1.0.0 Released | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+  <div class="blog-post">
+  
+    <h2>It&#39;s Dangerous 1.0.0 Released</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2018-10-18
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>It's Dangerous 1.0.0 has been released. See the <a href="https://itsdangerous.palletsprojects.com/en/1.0.x/changes/#version-1-0-0">changelog</a> for a list of changes since the last release on 2014-03-28.</p>
+<p>It's Dangerous provides secure message signing and serialization. Without the secret key used to sign a message, the content cannot be changed without invalidating the signature. This allows, for example, Flask to store information in a session cookie that is transmitted over public networks, and be sure that the data has not been tampered with when loading a subsequent request.</p>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/ItsDangerous">PyPI</a> with pip:</p>
+<pre><code>pip install -U ItsDangerous
+</code></pre>
+<h2 id="imports-will-change">Imports will change</h2><p>Previously, It's Dangerous was a single Python module with about 1000 lines of code. The project has been reorganized as a package with submodules, which will make the code easier to navigate going forward.</p>
+<p>However, this means that <em>everything</em> that It's Dangerous imported or defined used to be importable from <code>itsdangerous</code>. With the reorganization, only the public API is importable from <code>itsdangerous</code>. To ease transition, "public" was defined as any name that was previously documented in the API section. These compatibility imports will be deprecated and removed in future releases. If you were importing undocumented names, you'll need to import them from the correct submodule now.</p>
+<h2 id="read-the-docs">Read the Docs</h2><p>It's Dangerous has moved its docs to Read the Docs. The new URL for the docs is <a href="https://itsdangerous.palletsprojects.com/">https://itsdangerous.palletsprojects.com/</a>.</p>
+<p>The docs were previously hosted on PyPI's docs site (<code>pythonhosted.org/itsdangerous</code>), but this site has been deprecated and it is no longer possible to upload new docs there. Unfortunately, due to the deprecation, there is no way to add a redirect to the new docs. As of this release, any URLs pointing to the old site will break.</p>
+<h2 id="get-involved">Get Involved</h2><p>The Pallets team depends on you, the community, to help keep our projects sustainable. Whether you report issues, write documentation, create patches, or answer questions, we appreciate all the help you provide. <a href="https://github.com/pallets/click">Star the project on GitHub</a> to show support, and <a href="https://help.github.com/articles/watching-and-unwatching-repositories/">watch</a> the repository to see discussions and pull requests as they happen.</p>
+<h2 id="donate">Donate</h2><p>We accept donations through the Python Software Foundation in order to support our efforts to maintain the projects and grow the community. <a href="/donate"><strong>Click here to donate.</strong></a></p>
+
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/itsdangerous-1-0-0-released/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>

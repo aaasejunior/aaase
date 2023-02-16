@@ -1,0 +1,240 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:site_name" content="Pallets">
+<meta property="og:url" content="https://aaasejuniorboard.com/blog/werkzeug-0-15-0-released/">
+<meta property="og:title" content="Werkzeug 0.15.0 Released">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://aaasejuniorboard.com/og_image.png">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="logo">
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="/static/pygments.css">
+<script type="text/javascript" src=""></script>
+<title>Werkzeug 0.15.0 Released | The Pallets Projects</title>
+<body class="default">
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">The Pallets Projects</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li>
+            
+              <a href="/p/">Projects</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/governance/">Governance</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/people/">People</a>
+            
+          </li>
+        
+          <li class="active">
+            
+              <a href="/blog/">Blog</a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/donate"><strong>Donate</strong></a>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="body-wrapper">
+    
+    <div class="container">
+      
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="tree-nav nocontent">
+        
+  
+  
+  <li><a href="/blog/">Blog</a></li>
+
+        
+  
+  
+  <li><a href="/blog/categories/">Categories</a><ul>
+          
+            
+  
+  
+  <li><a href="/blog/categories/releases/">Releases</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/security/">Security</a></li>
+
+          
+            
+  
+  
+  <li><a href="/blog/categories/meta/">Meta</a></li>
+
+          
+        </ul></li>
+
+        
+          <li><a href="/blog/feed.xml">Blog Feed</a>
+        
+      </ul>
+    </div>
+    <div class="col-sm-9">
+      
+  
+  <div class="blog-post">
+  
+    <h2>Werkzeug 0.15.0 Released</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/davidism">David Lord</a>
+    
+    on 2019-03-19
+      in
+      
+        <a href="/blog/categories/releases/">Releases</a>
+      
+    
+  </p>
+  <p>The Pallets team is pleased to release Werkzeug 0.15.0. This represents
+over a year of work from the community and maintainers, and as such
+there is an unusually long list of changes. Some of the notable ones
+are listed below, but there are many more throughout the framework.
+<a href="https://werkzeug.palletsprojects.com/en/0.15.x/changes/">Read the full changelog</a>
+to understand what changes may affect your code when upgrading.</p>
+<ul>
+<li>Building URLs is ~7x faster.</li>
+<li>Redirects now use HTTP code 308 by default. This preserves the method
+and form data.</li>
+<li><code>int</code> and <code>float</code> URL converters can handle negative numbers.</li>
+<li>The debugger saw a number of improvements. Python 3's chained
+exceptions are correctly displayed and logged. Frames of user code
+are highlighted to make it easier to read tracebacks.</li>
+<li>The reloader is much better at detecting how to re-run itself. It
+handles <code>python -m</code> as well as non-Python executable scripts.</li>
+<li>The test client takes a <code>json</code> parameter, and the response class has
+a <code>get_json</code> method. This makes testing JSON APIs much more
+straightforward.</li>
+<li>URLs with Unicode or percent-escapes are handled better. Quoting when
+converting between URIs and IRIs is more consistent, and the unquoted
+URL is logged by the dev server rather than showing percent escapes.</li>
+<li>Deprecation warnings have been added throughout the code in
+preparation for version 1.0.</li>
+<li>Werkzeug now uses <a href="https://pre-commit.com/">pre-commit</a>, <a href="https://black.readthedocs.io/en/stable/">black</a>, <a href="https://github.com/asottile/reorder_python_imports">reorder-python-imports</a>,
+and <a href="http://flake8.pycqa.org/en/latest/">flake8</a> to provide consistent code formatting. The code also
+moved to a <code>src</code> directory layout.</li>
+<li>And much more!</li>
+</ul>
+<h2 id="werkzeug-contrib-has-been-deprecated"><code>werkzeug.contrib</code> has been deprecated</h2><p>The code under the <code>werkzeug.contrib</code> package has been deprecated. In
+version 1.0, code will either be moved into <code>werkzeug</code> core, or will be
+removed completely. Contrib started as a place to put code that wasn't
+clear where it belonged. In the 12 years since Werkzeug started, the
+packaging ecosystem and Werkzeug's codebase have evolved. The contrib
+code has not been widely maintained, often having better implementations
+elsewhere or no longer being required.</p>
+<ul>
+<li><code>ProxyFix</code>, <code>LintMiddleware</code>, and <code>ProfilerMiddleware</code> have moved into
+<code>werkzeug.middleware</code>.</li>
+<li><code>securecookie</code> and <code>sessions</code> have been extracted to the
+<a href="https://github.com/pallets/secure-cookie">pallets/secure-cookie</a>
+repository.</li>
+<li><code>cache</code> has been extracted to the
+<a href="https://github.com/pallets/cachelib">pallets/cachelib</a> repository.</li>
+<li>Everything else is deprecated.</li>
+</ul>
+<h2 id="deprecation-warnings">Deprecation Warnings</h2><p>Besides contrib, many other parts of Werkzeug have been marked, either
+explicitly or implicitly, as deprecated, for many years. This release
+ensures that every occurrence issues a clear deprecation warning that
+mentions when the code will be removed. Currently, everything marked
+deprecated is slated to be removed in version 1.0.</p>
+<ul>
+<li>Unused compatibility imports for code that was moved to another module
+within Werkzeug. This code is still available, but should be imported
+from the correct location.</li>
+<li>Middleware in <code>werkzeug.wsgi</code> has moved to <code>werkzeug.middleware</code>.</li>
+<li>The <code>werkzeug.wrappers</code> module was converted to a package of more
+specific modules. Imports for classes that were publicly documented in
+the previous version will work without change.</li>
+</ul>
+<h2 id="install-or-upgrade">Install or Upgrade</h2><p>Install from <a href="https://pypi.org/project/Werkzeug/">PyPI</a> with pip:</p>
+<pre><code>pip install -U Werkzeug
+</code></pre>
+<h2 id="donate">Donate</h2><p>The Pallets organization has joined the Python Software Foundation. We
+now accept donations through the PSF in order to support our efforts to
+maintain the projects and grow the community.
+<a href="https://psfmember.org/civicrm/contribute/transact?reset=1&amp;id=20">Click here to donate.</a></p>
+
+  </div>
+
+
+    </div>
+  </div>
+
+    </div>
+    
+  </div>
+
+  
+  <div class="bottomsummary">
+    <div class="container">
+    </div>
+  </div>
+  
+
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 icon-bar">
+          <a href="https://github.com/pallets/" title="Pallets on GitHub"
+            ><i class="fa fa-github"></i></a>
+          <a href="https://twitter.com/PalletsTeam/" title="Pallets on Twitter"
+            ><i class="fa fa-twitter"></i></a>
+          <a href="https://discord.gg/pallets/" title="Chat on Discord"
+            ><i class="fa fa-comment"></i></a>
+          <a href="https://github.com/pallets/website/tree/master/content/blog/werkzeug-0-15-0-released/contents.lr" title="View source for this page"><i class="fa fa-code"></i></a>
+        </div>
+        <div class="col-sm-9">
+          <a href="/license/">License &amp; Copyright</a> •
+          <a href="/contact/">Contact</a> •
+          Made with <i class="fa fa-fw fa-heart" title="Heart"><span hidden>Heart</span></i>
+          and <a href="https://www.getlektor.com/">Lektor</a> •
+          Powered by <a href="https://www.netlify.com/">Netlify</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+</body>
