@@ -37,8 +37,8 @@ pluralizelisttitles = false
 
 [[menu.main]]
     name       = "Junior Seminar Project"
-    identifier = "menu.blog"
-    url        = "/blog/"
+    identifier = "sem"
+    url        = "/sem/"
     weight     = 2
 
 [[menu.main]]
