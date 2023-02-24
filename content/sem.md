@@ -15,7 +15,7 @@ Each semester, we collect topic proposals that fall under a common theme. We the
 participants to form focus groups. The project lead is expected to organize focus group discussions, and each group will decide their timeline and 
 deliverables. Each project is expected to take 3-4 months.
 
-<img src="https://user-images.githubusercontent.com/34157884/221038917-79ee189c-2b29-4d49-af7e-3efaeb87442f.png"  width="30%" height="20%">
+<img src="https://user-images.githubusercontent.com/34157884/221038917-79ee189c-2b29-4d49-af7e-3efaeb87442f.png"  width="70%" height="20%">
 
 # Initiative 1:
 ## Invisible Minority: Falling in a Data Gap
