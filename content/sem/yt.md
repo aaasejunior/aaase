@@ -2,9 +2,8 @@
 title = "YouTube channel"
 +++
 
-### The AAASE Junior Board is a nonprofit organization that
+### Follow us on [YouTube](https://www.youtube.com/channel/UCEttnqdR3zuI2oF-kOJT5fg)
 ​
-- celebrates our diverse Asian American cultural identities
-- encourages open dialogues on current affairs
-- facilitates accessible exchange of knowledge
-- and promotes social advocacy
+<iframe width="420" height="315"
+src="https://www.youtube.com/watch?v=lwLfFBNSm-oautoplay=1&mute=1">
+</iframe>
