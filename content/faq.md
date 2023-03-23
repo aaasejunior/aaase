@@ -1,10 +1,9 @@
 +++
-title = "Board Members"
+title = "Meet the team"
 description = "Meet the team"
 +++
 
 
-### Executive officers
 <head>
 <style>
 figcaption {
@@ -29,7 +28,6 @@ figcaption {
   </tr>
 </table>
 
-### Advisors
 
 <table width="100%" border="0">
   <tr>

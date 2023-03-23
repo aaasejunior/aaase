@@ -41,74 +41,113 @@ pluralizelisttitles = false
 #    parent     = "menu.home"
 
 [[menu.main]]
-    name       = "Junior Seminar Project"
+    name       = "What we do"
     identifier = "sem"
     url        = "/sem/"
     weight     = 2
 
 [[menu.main]]
-    name       = "Board Members"
+    name       = "Mission statement"
+    url        = "/sem/mission"
+    weight     = 1
+    parent     = "sem"
+
+[[menu.main]]
+    name       = "Seminar project"
+    url        = "/sem/sem"
+    weight     = 2
+    parent     = "sem"
+
+[[menu.main]]
+    name       = "AAASE summer academy"
+    url        = "/sem/summ"
+    weight     = 3
+    parent     = "sem"
+
+
+[[menu.main]]
+    name       = "Youtube channels"
+    url        = "/sem/yt"
+    weight     = 4
+    parent     = "sem"
+
+
+[[menu.main]]
+    name       = "Who we are"
     identifier = "faq"
     url        = "/faq/"
     weight     = 3
 
 [[menu.main]]
+    identifier = "geti"
+    name       = "Get Involved"
+    url        = "/geti/"
+    weight     = 4
+
+
+[[menu.main]]
     identifier = "contact"
     name       = "Bylaws"
     url        = "/contact/"
-    weight     = 4
+    weight     = 5
 
 
 # Top bar social links menu
 
+#[[menu.topbar]]
+#    weight = 1
+#    name = "Phone"
+#    url = "tel:+01 xxxxxxxxx"
+#    pre = "<i class='fas fa-2x fa-phone'></i>"
+
+#[[menu.topbar]]
+#    weight = 2
+#    name = "GitHub"
+#    url = "https://github.com/devcows/hugo-universal-theme"
+#    pre = "<i class='fab fa-2x fa-github'></i>"
+
 [[menu.topbar]]
     weight = 1
-    name = "Phone"
-    url = "tel:+01 xxxxxxxxx"
-    pre = "<i class='fas fa-2x fa-phone'></i>"
+    name = "Instagram"
+    url = "https://github.com/devcows/hugo-universal-theme"
+    pre = "<i class='fab fa-2x fa-instagram'></i>"
+
+#[[menu.topbar]]
+#    weight = 3
+#    name = "Facebook"
+#    url = "http://facebook.com"
+#    pre = "<i class='fab fa-2x fa-facebook'></i>"
+
+#[[menu.topbar]]
+#    weight = 4
+#    name = "Twitter"
+#    url = "http://twitter.com"
+#    pre = "<i class='fab fa-2x fa-twitter'></i>"
 
 [[menu.topbar]]
     weight = 2
-    name = "GitHub"
-    url = "https://github.com/devcows/hugo-universal-theme"
-    pre = "<i class='fab fa-2x fa-github'></i>"
-
-[[menu.topbar]]
-    weight = 3
-    name = "Facebook"
-    url = "http://facebook.com"
-    pre = "<i class='fab fa-2x fa-facebook'></i>"
-
-[[menu.topbar]]
-    weight = 4
-    name = "Twitter"
-    url = "http://twitter.com"
-    pre = "<i class='fab fa-2x fa-twitter'></i>"
-
-[[menu.topbar]]
-    weight = 5
     name = "Email"
-    url = "mailto:hello@universal.com"
+    url = "mailto:youth.aaase@gmail.com"
     pre = "<i class='fas fa-2x fa-envelope'></i>"
 
 [params]
-    viewMorePostLink = "/blog/"
-    author = "DevCows"
-    defaultKeywords = ["devcows", "hugo", "go"]
-    mainSections = ["blog"]
-    defaultDescription = "Site template made by Devcows using Hugo"
+#    viewMorePostLink = "/blog/"
+#    author = "DevCows"
+#    defaultKeywords = ["devcows", "hugo", "go"]
+#    mainSections = ["blog"]
+#    defaultDescription = "Site template made by Devcows using Hugo"
 
     # Social media
-    facebook_site = "" # the Facebook handle of your site ('https://www.facebook.com/HANDLE')
-    twitter_site = "GoHugoIO" # the Twitter handle of your site (without the '@')
-    default_sharing_image = "img/sharing-default.png"
+ #   facebook_site = "" # the Facebook handle of your site ('https://www.facebook.com/HANDLE')
+  #  twitter_site = "GoHugoIO" # the Twitter handle of your site (without the '@')
+   # default_sharing_image = "img/sharing-default.png"
 
     # Google Maps widget: If `googleMapsApiKey` is not set, no key will be passed to Google (which likely results in a broken map widget).
-    enableGoogleMaps = true
-    googleMapsApiKey = "AIzaSyAv7Sza8NSp9_l_g8G2vlo0H4ydEPn_2jY"
+   # enableGoogleMaps = true
+   # googleMapsApiKey = "AIzaSyAv7Sza8NSp9_l_g8G2vlo0H4ydEPn_2jY"
 
-    latitude = "-12.043333"
-    longitude = "-77.028333"
+    #latitude = "-12.043333"
+    #longitude = "-77.028333"
 
     # Style options: default (light-blue), blue, green, marsala, pink, red, turquoise, violet
     style = "default"
@@ -153,7 +192,7 @@ pluralizelisttitles = false
     # Format dates with Go's time formatting
     date_format = "January 2, 2006"
 
-    dropdown_mouse_over = false
+    dropdown_mouse_over = true
 
     disabled_logo = false
     logo_text = "Universal"
@@ -177,7 +216,7 @@ pluralizelisttitles = false
 # Enable or disable top bar with social icons
 [params.topbar]
     enable = true
-    text = """<p class="hidden-sm hidden-xs">Contact us on +420 777 555 333 or hello@universal.com.</p>
+    text = """<p class="hidden-sm hidden-xs">Contact us on youth.aaase@gmail.com.</p>
       <p class="hidden-md hidden-lg"><a href="tel:+420 777 555 333" data-animate-hover="pulse"><i class="fas fa-phone"></i></a>
       <a href="mailto:hello@universal.com" data-animate-hover="pulse"><i class="fas fa-envelope"></i></a>
       </p>
@@ -218,7 +257,7 @@ pluralizelisttitles = false
     # For more information take a look at the README.
 
 [params.testimonials]
-    enable = true
+    enable = false
     # All testimonials are defined in their own files. You can find example items
     # at 'exampleSite/data/testimonials'.
     # For more information take a look at the README.
@@ -241,11 +280,12 @@ pluralizelisttitles = false
 #    title = "Our Clients"
 #    subtitle = ""
 
-[params.recent_posts]
-    enable = false
-    title = "From our blog"
-    subtitle = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo."
-    hide_summary = false
+#[params.recent_posts]
+#    enable = false
+#    title = "From our blog"
+#    subtitle = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, 
+#ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo."
+#    hide_summary = false
 
 [params.footer.recent_posts]
     enable = true
