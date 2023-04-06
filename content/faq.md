@@ -54,7 +54,7 @@ description = "Meet the team"
       <img src="../img/logo.png" alt="Jane" style="width:30%">
       <div class="container">
         <h2>Alex Chen</h2>
-        <p class="title">Exeuctive Board Member</p>
+        <p class="title">Executive Board Member</p>
       </div>
     </div>
 </div>
