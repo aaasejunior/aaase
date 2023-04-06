@@ -22,10 +22,8 @@ description = "Meet the team"
     <div class="card">
       <img src="../img/logo.png" alt="Jane" style="width:30%">
       <div class="container">
-        <h2>Jane Doe</h2>
-        <p class="title">CEO &amp; Founder</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>example@example.com</p>
+        <h2>Cheyenne Teng</h2>
+        <p class="title">Advisor</p>
       </div>
     </div>
   </div>
@@ -34,10 +32,8 @@ description = "Meet the team"
     <div class="card">
       <img src="../img/logo.png" alt="Mike" style="width:30%">
       <div class="container">
-        <h2>Mike Ross</h2>
-        <p class="title">Art Director</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>example@example.com</p>
+        <h2>Linhan Shen</h2>
+        <p class="title">Advisor</p>
       </div>
     </div>
   </div>
@@ -46,10 +42,8 @@ description = "Meet the team"
     <div class="card">
       <img src="../img/logo.png" alt="John" style="width:30%">
       <div class="container">
-        <h2>John Doe</h2>
-        <p class="title">Designer</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>example@example.com</p>
+        <h2>Aditya Lele</h2>
+        <p class="title">Advisor</p>
       </div>
     </div>
   </div>
@@ -59,10 +53,8 @@ description = "Meet the team"
     <div class="card">
       <img src="../img/logo.png" alt="Jane" style="width:30%">
       <div class="container">
-        <h2>Jane Doe</h2>
-        <p class="title">CEO &amp; Founder</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-        <p>example@example.com</p>
+        <h2>Alex Chen</h2>
+        <p class="title">Exeuctive Board Member</p>
       </div>
     </div>
 </div>
