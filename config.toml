@@ -74,8 +74,8 @@ pluralizelisttitles = false
 
 [[menu.main]]
     name       = "Who we are"
-    identifier = "faq"
-    url        = "/faq/"
+    identifier = "team"
+    url        = "/team/"
     weight     = 3
 
 [[menu.main]]
@@ -88,7 +88,7 @@ pluralizelisttitles = false
 [[menu.main]]
     identifier = "contact"
     name       = "Bylaws"
-    url        = "/contact/"
+    url        = "/bylaws/"
     weight     = 5
 
 
