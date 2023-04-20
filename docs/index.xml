@@ -9,15 +9,6 @@
     <lastBuildDate>Thu, 16 Feb 2023 17:51:35 -0500</lastBuildDate><atom:link href="https://adityadlele.github.io/aaase/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Example</title>
-      <link>https://adityadlele.github.io/aaase/bylaws/example/</link>
-      <pubDate>Thu, 16 Feb 2023 17:51:35 -0500</pubDate>
-      
-      <guid>https://adityadlele.github.io/aaase/bylaws/example/</guid>
-      <description>fff </description>
-    </item>
-    
-    <item>
-      <title>Example</title>
       <link>https://adityadlele.github.io/aaase/members/example/</link>
       <pubDate>Thu, 16 Feb 2023 17:51:35 -0500</pubDate>
       
@@ -103,10 +94,19 @@ Celebrates our diverse Asian American cultural identities Encourages open dialog
     
     <item>
       <title>the Junior Seminar Project</title>
-      <link>https://adityadlele.github.io/aaase/blog/1/01/01/example/</link>
+      <link>https://adityadlele.github.io/aaase/bkp_sem/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://adityadlele.github.io/aaase/blog/1/01/01/example/</guid>
+      <guid>https://adityadlele.github.io/aaase/bkp_sem/</guid>
+      <description>Our goal is to Provide a platform for young Asian Americans to Engage in important discussions of our times Encourage action and initiatives Build a community to learn, grow, and have fun together! Each semester, we collect topic proposals that fall under a common theme. We then ask project leads to share the proposal with the public and invite participants to form focus groups. The project lead is expected to organize focus group discussions, and each group will decide their timeline and deliverables.</description>
+    </item>
+    
+    <item>
+      <title>the Junior Seminar Project</title>
+      <link>https://adityadlele.github.io/aaase/blog/example/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://adityadlele.github.io/aaase/blog/example/</guid>
       <description>xxxxxx</description>
     </item>
     
@@ -116,7 +116,7 @@ Celebrates our diverse Asian American cultural identities Encourages open dialog
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://adityadlele.github.io/aaase/sem/</guid>
-      <description>Our goal is to Provide a platform for young Asian Americans to Engage in important discussions of our times Encourage action and initiatives Build a community to learn, grow, and have fun together! Each semester, we collect topic proposals that fall under a common theme. We then ask project leads to share the proposal with the public and invite participants to form focus groups. The project lead is expected to organize focus group discussions, and each group will decide their timeline and deliverables.</description>
+      <description>What are junior seminars? </description>
     </item>
     
     <item>
@@ -125,7 +125,7 @@ Celebrates our diverse Asian American cultural identities Encourages open dialog
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://adityadlele.github.io/aaase/sem/sem/</guid>
-      <description>Our goal is to Provide a platform for young Asian Americans to Engage in important discussions of our times Encourage action and initiatives Build a community to learn, grow, and have fun together! Each semester, we collect topic proposals that fall under a common theme. We then ask project leads to share the proposal with the public and invite participants to form focus groups. The project lead is expected to organize focus group discussions, and each group will decide their timeline and deliverables.</description>
+      <description>What are junior seminars? Summary of our recent efforts </description>
     </item>
     
     <item>

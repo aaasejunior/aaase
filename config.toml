@@ -210,8 +210,8 @@ pluralizelisttitles = false
 #      </p>
 #      """
 
-[permalinks]
-    blog = "/blog/:year/:month/:day/:filename/"
+#[permalinks]
+#    blog = "/blog/:year/:month/:day/:filename/"
 
 # Enable or disable top bar with social icons
 [params.topbar]
@@ -287,8 +287,8 @@ pluralizelisttitles = false
 #ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo."
 #    hide_summary = false
 
-[params.footer.recent_posts]
-    enable = true
+#[params.footer.recent_posts]
+#    enable = true
 
 [taxonomies]
   category = "categories"
