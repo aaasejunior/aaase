@@ -2,9 +2,9 @@
 title = "Mission Statement"
 +++
 
-### The AAASE Junior Board is a nonprofit organization that
+## The AAASE Junior Board is a nonprofit organization that
 ​
-- celebrates our diverse Asian American cultural identities
-- encourages open dialogues on current affairs
-- facilitates accessible exchange of knowledge
-- and promotes social advocacy
+- ### Celebrates our diverse Asian American cultural identities
+- ### Encourages open dialogues on current affairs
+- ### Facilitates accessible exchange of knowledge
+- ### and promotes social advocacy
