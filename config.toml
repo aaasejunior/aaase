@@ -86,7 +86,7 @@ pluralizelisttitles = false
 
 
 [[menu.main]]
-    identifier = "contact"
+    identifier = "bylaws"
     name       = "Bylaws"
     url        = "/bylaws/"
     weight     = 5
