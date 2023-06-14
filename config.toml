@@ -54,9 +54,22 @@ pluralizelisttitles = false
 
 [[menu.main]]
     name       = "Seminar project"
-    url        = "/sem/sem"
+    identifier = "seminar"
+    url        = "/seminar"
+    weight     = 3
+#    parent     = "sem"
+
+[[menu.main]]
+    name       = "Summary"
+    url        = "/seminar/summary"
+    weight     = 1
+    parent     = "seminar"
+
+[[menu.main]]
+    name       = "Mental health initiative"          
+    url        = "/seminar/mental_h"
     weight     = 2
-    parent     = "sem"
+    parent     = "seminar"
 
 [[menu.main]]
     name       = "AAASE summer academy"
@@ -74,22 +87,34 @@ pluralizelisttitles = false
 
 [[menu.main]]
     name       = "Who we are"
-    identifier = "team"
-    url        = "/team/"
-    weight     = 3
+    identifier = "whoweare"
+    url        = "/whoweare/"
+    weight     = 4
+
+[[menu.main]]
+    name       = "Team"
+    url        = "/whoweare/team"
+    weight     = 1
+    parent     = "whoweare"
+
+[[menu.main]]
+    name       = "Bylaws"            
+    url        = "/whoweare/bylaws"
+    weight     = 2
+    parent     = "whoweare"
 
 [[menu.main]]
     identifier = "geti"
     name       = "Get Involved"
     url        = "/geti/"
-    weight     = 4
-
-
-[[menu.main]]
-    identifier = "bylaws"
-    name       = "Bylaws"
-    url        = "/bylaws/"
     weight     = 5
+
+
+#[[menu.main]]
+#    identifier = "bylaws"
+#    name       = "Bylaws"
+#    url        = "/bylaws/"
+#    weight     = 5
 
 
 # Top bar social links menu
@@ -186,8 +211,8 @@ pluralizelisttitles = false
     enableRecaptchaInContactForm = false
     googleRecaptchaKey = "site_key_for_google_recaptcha"
 
-    about_us = "<p>We are supported by the Asian American Academy of Science and Engineering (www.aaase.org), but run independently. </p>"
-    copyright = "Copyright (c) 2022 - 2023, AAASE Junior Board; all rights reserved."
+#    about_us = "<p>We are supported by the Asian American Academy of Science and Engineering (www.aaase.org), but run independently. </p>"
+#    copyright = "Copyright (c) 2022 - 2023, AAASE Junior Board; all rights reserved."
 
     # Format dates with Go's time formatting
     date_format = "January 2, 2006"
